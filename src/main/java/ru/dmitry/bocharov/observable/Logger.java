@@ -11,7 +11,6 @@ public class Logger implements IObservable {
 
     private List<IObserver> _observers;
     private String _message;
-    private Date _dateTime;
     private int _counter=0;
 
     public Logger(){
@@ -22,7 +21,6 @@ public class Logger implements IObservable {
 
     public void Log(String message, Date dateTime){
         _message=EditingMessage(message,dateTime);
-        _dateTime=dateTime;
         NotifyObserver();
     }
 
@@ -40,7 +38,7 @@ public class Logger implements IObservable {
 
     public void NotifyObserver() {
         for (IObserver observer:_observers){
-            observer.update(_message,_dateTime);
+            observer.update(_message);
         }
     }
 }

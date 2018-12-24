@@ -2,9 +2,6 @@ package ru.dmitry.bocharov.observers;
 
 import ru.dmitry.bocharov.observable.IObservable;
 
-import java.util.Date;
-
-
 public class Observer implements IObserver {
     private LogOutput _logOutput;
     private SaveLogOnFile _saveLogOnFile;
@@ -27,8 +24,9 @@ public class Observer implements IObserver {
     }
 
     @Override
-    public void update(String message, Date dateTime) {
-        if(_typeOfAction.equals(TypeOfAction.Output)) _logOutput.update(message,dateTime);
-        else if(_typeOfAction.equals(TypeOfAction.Save)) _saveLogOnFile.update(message,dateTime);
+    public void update(String message) {
+        if(_typeOfAction.equals(TypeOfAction.Output)) _logOutput.Print(message);
+        else if(_typeOfAction.equals(TypeOfAction.Save)) _saveLogOnFile.Save(message);
+        }
     }
-}
+

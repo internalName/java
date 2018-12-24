@@ -2,10 +2,8 @@ package ru.dmitry.bocharov.observers;
 
 import ru.dmitry.bocharov.observable.IObservable;
 
-import java.util.Date;
 
-
-class LogOutput implements IObserver {
+class LogOutput {
 
     private IObservable _logger;
 
@@ -14,7 +12,7 @@ class LogOutput implements IObserver {
         _logger=logger;
     }
 
-    public void update(String message, Date dateTime) {
+    public void Print(String message) {
 
         System.out.println(message);
     }

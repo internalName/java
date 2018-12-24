@@ -10,7 +10,7 @@ import java.nio.file.*;
 
 import java.util.Date;
 
-class SaveLogOnFile implements IObserver {
+class SaveLogOnFile {
     private IObservable _logger;
     private  String _direction;
     private String _pathToTheFile;
@@ -55,7 +55,7 @@ class SaveLogOnFile implements IObserver {
          }
      }
 
-     public void update(String message, Date dateTime)  {
+     public void Save(String message)  {
 
          try {
              Files.write(Paths.get(_pathToTheFile), message.getBytes(), StandardOpenOption.APPEND);
@@ -64,4 +64,4 @@ class SaveLogOnFile implements IObserver {
              System.out.println(e);
          }
          }
-     }
+    }
