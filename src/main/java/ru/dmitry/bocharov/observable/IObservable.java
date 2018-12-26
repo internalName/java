@@ -1,9 +1,9 @@
 package ru.dmitry.bocharov.observable;
 
-import ru.dmitry.bocharov.observers.IObserver;
+import ru.dmitry.bocharov.observers.Observer;
 
 public interface IObservable {
-        void AddObserver(IObserver observer);
-        void RemoveObserver(IObserver observer);
+        void AddObserver(Observer observer);
+        void RemoveObserver(Observer observer);
         void NotifyObserver();
 }

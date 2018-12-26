@@ -9,5 +9,9 @@
         <module name="java" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="java" target="7" />
+      <module name="java-observer" target="7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

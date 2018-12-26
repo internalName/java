@@ -1,5 +1,5 @@
 package ru.dmitry.bocharov.observers;
 
-public interface IObserver {
+interface IObserver {
     void update(String message);
 }

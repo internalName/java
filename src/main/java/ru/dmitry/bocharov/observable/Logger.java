@@ -1,43 +1,34 @@
 package ru.dmitry.bocharov.observable;
 
-import ru.dmitry.bocharov.Direction;
-import ru.dmitry.bocharov.observers.IObserver;
+import ru.dmitry.bocharov.observers.Observer;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Logger implements IObservable {
 
-    private List<IObserver> _observers;
+    private List<Observer> _observers;
     private String _message;
-    private int _counter=0;
 
     public Logger(){
         _observers=new LinkedList<>();
-        System.out.println("Save information file on:\n"+ Direction.GetDirection());
     }
 
-
-    public void Log(String message, Date dateTime){
-        _message=EditingMessage(message,dateTime);
+    public void Log(String message){
+        _message=message;
         NotifyObserver();
     }
 
-    private String EditingMessage(String message,Date dateTime){
-        return ++_counter+". DateTime: "+dateTime+" message: "+message+System.lineSeparator();
-    }
-
-    public void AddObserver(IObserver observer) {
+    public void AddObserver(Observer observer) {
         _observers.add(observer);
     }
 
-    public void RemoveObserver(IObserver observer) {
+    public void RemoveObserver(Observer observer) {
         _observers.remove(observer);
     }
 
     public void NotifyObserver() {
-        for (IObserver observer:_observers){
+        for (Observer observer:_observers){
             observer.update(_message);
         }
     }

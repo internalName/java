@@ -1,0 +1,7 @@
+ru\dmitry\bocharov\observable\IObservable.class
+ru\dmitry\bocharov\observable\Logger.class
+ru\dmitry\bocharov\observers\LogOutput.class
+ru\dmitry\bocharov\observers\IObserver.class
+ru\dmitry\bocharov\observers\Observer.class
+ru\dmitry\bocharov\observers\SaveLogOnFile.class
+ru\dmitry\bocharov\LaunchPoint.class

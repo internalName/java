@@ -1,24 +1,19 @@
 package ru.dmitry.bocharov.observers;
 
-import ru.dmitry.bocharov.Direction;
 import ru.dmitry.bocharov.observable.IObservable;
-import ru.dmitry.bocharov.observable.Logger;
-
-
 import java.io.IOException;
 import java.nio.file.*;
-
 import java.util.Date;
 
-class SaveLogOnFile {
-    private IObservable _logger;
+public class SaveLogOnFile extends Observer {
     private  String _direction;
     private String _pathToTheFile;
 
 
      public SaveLogOnFile(IObservable logger){
-         _logger=logger;
-         _direction= Direction.GetDirection();
+         super(logger);
+
+         _direction= Observer.DIRECTION;
          _pathToTheFile=_direction+"\\file.txt";
 
             CheckPathAndFile();
@@ -32,7 +27,7 @@ class SaveLogOnFile {
                  Files.createDirectory(path);
              }
             catch (Exception e){
-                System.out.println(e);
+                System.out.println(Observer._PROBLEM_MESSAGE+e.getMessage());
             }
          }
             if(!Files.exists(Paths.get(_pathToTheFile))){
@@ -40,7 +35,7 @@ class SaveLogOnFile {
                     Files.createFile(Paths.get(_pathToTheFile));
                 }
                 catch (Exception e){
-                    System.out.println(e);
+                    System.out.println(Observer._PROBLEM_MESSAGE+e.getMessage());
                 }
 
             }
@@ -51,17 +46,17 @@ class SaveLogOnFile {
              Files.write(Paths.get(_pathToTheFile), ("Now : "+new Date().toString()+System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
          }
          catch (IOException e) {
-             System.out.println(e);
+             System.out.println(Observer._PROBLEM_MESSAGE+e.getMessage());
          }
      }
 
-     public void Save(String message)  {
-
-         try {
-             Files.write(Paths.get(_pathToTheFile), message.getBytes(), StandardOpenOption.APPEND);
-         }
-         catch (IOException e) {
-             System.out.println(e);
-         }
-         }
+    @Override
+    public void update(String message) {
+        try {
+            Files.write(Paths.get(_pathToTheFile), super.EditingMessage(message).getBytes(), StandardOpenOption.APPEND);
+        }
+        catch (IOException e) {
+            System.out.println(Observer._PROBLEM_MESSAGE+e.getMessage());
+        }
     }
+}

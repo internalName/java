@@ -1,25 +1,28 @@
 package ru.dmitry.bocharov;
 
 import ru.dmitry.bocharov.observable.Logger;
-import ru.dmitry.bocharov.observers.IObserver;
 import ru.dmitry.bocharov.observers.Observer;
-import ru.dmitry.bocharov.observers.TypeOfAction;
-
-import java.util.Date;
-
+import ru.dmitry.bocharov.observers.LogOutput;
+import ru.dmitry.bocharov.observers.SaveLogOnFile;
 
 public class LaunchPoint {
     public static void main(String[] args) {
+        System.out.println("Save information file on:\n"+ Observer.DIRECTION);
+
         Logger logger=new Logger();
-        IObserver observerFirst=  new Observer(logger, TypeOfAction.Output);
-        IObserver observerSecond=  new Observer(logger,TypeOfAction.Save);
 
+        Observer observerFirst=  new SaveLogOnFile(logger);
+        Observer observerSecond=  new LogOutput(logger);
 
-        logger.Log("first",new Date());
-        logger.Log("second",new Date());
-        logger.RemoveObserver( observerFirst);
-        logger.Log("third",new Date());
+        logger.Log("first");
+        logger.Log("second");
+
+        logger.RemoveObserver(observerFirst);
+
+        logger.Log("third");
+
         logger.RemoveObserver(observerSecond);
-        logger.Log("fourth",new Date());
+
+        logger.Log("fourth");
     }
 }

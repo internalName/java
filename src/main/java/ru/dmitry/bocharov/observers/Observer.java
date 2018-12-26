@@ -1,32 +1,23 @@
 package ru.dmitry.bocharov.observers;
 
 import ru.dmitry.bocharov.observable.IObservable;
+import java.io.File;
+import java.util.Date;
 
-public class Observer implements IObserver {
-    private LogOutput _logOutput;
-    private SaveLogOnFile _saveLogOnFile;
-    private IObservable _observable;
-    private TypeOfAction _typeOfAction;
+public abstract class Observer implements IObserver {
+    public static final String DIRECTION=new File("").getAbsolutePath()+"\\save file";
+    protected static final String _PROBLEM_MESSAGE="Houston, we have a problems!\n";
+    private int _counter=0;
 
-    public Observer(IObservable logger, TypeOfAction typeOfAction){
-        _observable=logger;
-        _typeOfAction=typeOfAction;
+     Observer(IObservable logger){
+        logger.AddObserver(this);
+    }
 
-        if(typeOfAction.equals(TypeOfAction.Save)) {
-            _saveLogOnFile=new SaveLogOnFile(logger);
-            _observable.AddObserver(this);
-        }
-        else if(typeOfAction.equals(TypeOfAction.Output)){
-            _logOutput=new LogOutput(logger);
-            _observable.AddObserver(this);
-        }
-
+     String EditingMessage(String message){
+        return ++_counter+". DateTime: "+new Date()+" message: "+message+System.lineSeparator();
     }
 
     @Override
-    public void update(String message) {
-        if(_typeOfAction.equals(TypeOfAction.Output)) _logOutput.Print(message);
-        else if(_typeOfAction.equals(TypeOfAction.Save)) _saveLogOnFile.Save(message);
-        }
+    public abstract void update(String message);
     }
 

@@ -3,17 +3,14 @@ package ru.dmitry.bocharov.observers;
 import ru.dmitry.bocharov.observable.IObservable;
 
 
-class LogOutput {
-
-    private IObservable _logger;
-
+public class LogOutput extends Observer {
 
     public LogOutput(IObservable logger){
-        _logger=logger;
+        super(logger);
     }
 
-    public void Print(String message) {
-
-        System.out.println(message);
+    @Override
+    public void update(String message) {
+        System.out.println(super.EditingMessage(message));
     }
 }
