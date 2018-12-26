@@ -1,11 +1,11 @@
 package ru.dmitry.bocharov.observers;
 
 import ru.dmitry.bocharov.observable.IObservable;
-import java.io.File;
+import java.nio.file.*;
 import java.util.Date;
 
 public abstract class Observer implements IObserver {
-    public static final String DIRECTION=new File("").getAbsolutePath()+"\\save file";
+    public static final String DIRECTION=Paths.get("").toAbsolutePath().toString()+"\\save file";
     protected static final String _PROBLEM_MESSAGE="Houston, we have a problems!\n";
     private int _counter=0;
 
